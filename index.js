@@ -13,12 +13,17 @@ function addTask()
         task_btn_count++;
         show_tasks()
     }
+
 }
-function show_tasks()
+function show_tasks(reset_val=false)
 {
 let newBTN=''
         
   for(let i=1;i<task_objs.length;i++){newBTN+=task_objs[i]}
+    if(reset_val)
+    {
+      document.querySelector('.css-task-box-div').innerHTML=task_objs[0]
+    }
   if(task_btn_count<4)
     {
       document.querySelector('.css-task-box-div').innerHTML=newBTN+task_objs[0]
@@ -31,5 +36,10 @@ let newBTN=''
 }
 function task_complete(index)
 {
-  //index = task_objs.
+
+  index = task_objs.indexOf(`<button class='css-task-btn' onclick="task_complete(${index})">Task ${index}</button>`)
+  console.log('button ',index)
+  task_objs.splice(index,1)
+  task_btn_count--;
+  show_tasks(true);
 }
