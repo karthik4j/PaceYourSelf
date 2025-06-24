@@ -1,8 +1,31 @@
-let task_btn_count = 1;
-let completed_task = 0;
-let task_objs = [];
-task_objs.push(document.querySelector('.css-task-box-div').innerHTML)
 
+function storeLocally()
+{
+  let obj =[task_objs,completed_task,task_btn_count]
+  obj = JSON.stringify(obj)
+  localStorage.setItem('todo',(obj));
+}
+function LoadData()
+{
+  let obj = localStorage.getItem('todo')
+ 
+  if(!obj)
+    {
+      task_objs=[]
+      task_objs.push(document.querySelector('.css-task-box-div').innerHTML);
+      task_btn_count=1;
+      completed_task=0;
+    }
+  else
+  {
+     obj = JSON.parse(obj)
+    task_objs = obj[0];
+    completed_task=obj[1];
+    task_btn_count=obj[2];
+  }
+}
+
+ LoadData();
 function addTask()
 { 
   let task_input;
@@ -47,13 +70,14 @@ function task_added(word)
         task_objs.push(newBTN)
         task_btn_count++;
         clear_user_prompt()
-        show_tasks()        
+        show_tasks()  
+      //  storeLocally();
   }
 
 function show_tasks(reset_val=false)
 {
 let newBTN=''
-        
+ 
   for(let i=1;i<task_objs.length;i++){newBTN+=task_objs[i]}
     if(reset_val)
     {
@@ -67,7 +91,8 @@ let newBTN=''
     {
       document.querySelector('.css-task-box-div').innerHTML=newBTN;
     }
-
+    storeLocally()
+     update_progress_bar(completed_task)
 }
 function task_complete(bt)
 {
@@ -80,7 +105,7 @@ if(test===false)
   button=button.outerHTML
   task_objs[bt]=button;
   completed_task++;
-  update_progress_bar(completed_task)
+   update_progress_bar(completed_task)
   }
   if(completed_task==3)
   {
@@ -97,6 +122,7 @@ if(test===false)
   {
     show_tasks()
   }
+  ///storeLocally();
 }
 
 function update_progress_bar(p_val)
@@ -110,10 +136,9 @@ function update_progress_bar(p_val)
     }
   else
   {
-  let degree = p_val===1?(1/3):(p_val===2?(2/3):3/3)
-  degree*=100*3.6
-
+  let degree=(3.6*p_val*100)/(task_btn_count-1)
   let ptr_degree = degree+2;
+  console.log(degree,p_val,task_btn_count)
   progress.style.background=`conic-gradient(#2fbaff ${degree}deg, #fff 0deg)`;
   ptr.style.background=`conic-gradient(from ${ptr_degree}deg,transparent 99%,#ff0000 1%)`
   }
@@ -127,8 +152,9 @@ function clear_tasks(index)
   show_tasks(true);
 }
 update_progress_bar(0);
-
+show_tasks()
 //console.log(bt,test)
   //console.log(index)
   //console.log(degree,ptr_degree)
  // console.log(ptr.style.background)
+  //console.log('loaded obj',(obj))
