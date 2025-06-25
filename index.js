@@ -154,11 +154,41 @@ function update_progress_bar(p_val)
   console.log(degree,p_val,task_btn_count)
   progress.style.background=`conic-gradient(cornflowerblue ${degree}deg, #fff 0deg)`;
   ptr.style.background=`conic-gradient(from ${ptr_degree}deg,transparent 99%,#ff0000 1%)`
-   progress.style.background=`conic-gradient(#fff ${1*3.6*100}deg, #fff 0deg)`
+   progress.style.background=`conic-gradient(#2fbaff ${1*3.6*100}deg, #fff 0deg)`
   percentage_val.innerHTML=`${Math.round(degree*100/360)}%`
   }
 }
 
+function show_about()
+{
+  let question=`<div class="css-about-page">
+                  <div class='about-title-span'>About</div>
+                  <div class='about-proj-div'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+                  <button class="css-banner-close" onclick=close_banner()>Close</button>
+              </div>
+              `
+  let banner = document.querySelector('.js-overlay')
+  banner.classList.add('css-overlay')
+   banner.innerHTML=question;
+}
+function show_help()
+{
+  let question=`<div class="css-about-page">
+                  <div class='about-title-span'>Help</div>
+                  <div class='about-proj-div'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+                  <button class="css-banner-close" onclick=close_banner()>Close</button>
+              </div>
+              `
+  let banner = document.querySelector('.js-overlay')
+  banner.classList.add('css-overlay')
+   banner.innerHTML=question;
+}
+function close_banner()
+{
+  let banner = document.querySelector('.js-overlay')
+  banner.classList.remove('css-overlay')
+  banner.innerHTML='';
+}
 function clear_tasks(index)
 {
   index = task_objs.indexOf(`<button class='css-task-btn' onclick="task_complete(${index})">Task ${index}</button>`)

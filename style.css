@@ -36,6 +36,7 @@ body
   flex-direction: row;
   align-items: center;
   justify-content: center;
+   max-height: 500px;
 }
 .buttons-div
 {
@@ -44,6 +45,7 @@ body
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  max-height: 500px;
 }
 .css-add-task-btn,.css-task-btn,.css-task-completed
 { 
@@ -168,6 +170,57 @@ body
   z-index: 5;
   font-size: 29px;
 
+}
+.css-hidden-bar
+{
+  font-size: 29px;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 0px;
+  height: 100px;
+  width: 100%;
+}
+.css-hidden-bar span
+{
+    font-size:50px;
+}
+.nav-btn-css
+{
+  opacity: 0;
+  border-style: none;
+  padding: 15px 30px;
+
+}
+.css-hidden-bar:hover .nav-btn-css,.css-banner-close
+{
+    border-style: none;
+  padding: 15px 30px;
+  justify-content: space-between;
+  background:#9eccf0;
+  opacity: 100;
+}
+.css-about-page
+{
+  height: 450px;
+  width:450px;
+  background-color: #85abab;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  border-width: 5px;
+  font-size: 18px;
+}
+.about-title-span,.css-banner-close,.about-proj-div
+{
+  margin-top:25px;
+  margin-left:15px;
+  margin-right: 15px;
 }
 @media screen and (max-width:800) 
 {
