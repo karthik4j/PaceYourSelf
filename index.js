@@ -151,10 +151,8 @@ function update_progress_bar(p_val)
   {
   let degree=(3.6*p_val*100)/(task_btn_count-1)
   let ptr_degree = degree+2;
-  console.log(degree,p_val,task_btn_count)
   progress.style.background=`conic-gradient(cornflowerblue ${degree}deg, #fff 0deg)`;
   ptr.style.background=`conic-gradient(from ${ptr_degree}deg,transparent 99%,#ff0000 1%)`
-   progress.style.background=`conic-gradient(#2fbaff ${1*3.6*100}deg, #fff 0deg)`
   percentage_val.innerHTML=`${Math.round(degree*100/360)}%`
   }
 }
