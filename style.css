@@ -2,7 +2,7 @@ body
 {
   font-family: Arial, Helvetica, sans-serif;
   font-size:16px;
-  padding: 20px;
+  background-color: #15302f;
 }
 .css-ui-box
 {
@@ -15,31 +15,46 @@ body
   right: 0px;
 }
 .css-prog-title-div
-{ height: 500px;
+{
+   padding-top: 25px;
+   padding-bottom: 25px;
   display: flex;
   flex-direction: row;
-  background-color: lightcoral;
+  background-color: #9eccf0;
   align-items: center;
-  justify-content: end;
+  justify-content: space-between;
+}
+.app-title
+{
+  font-size:48px;
+  margin-left: 25px;
 }
 .css-task-box-div
-{ 
+{ flex:1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.buttons-div
+{
+  flex:1;
   display: flex;
   flex-direction: column;
-  border-style: dashed;
-  border-width: 5px;
-  height: 750px;
+  align-items: center;
+  justify-content: center;
 }
-
 .css-add-task-btn,.css-task-btn,.css-task-completed
-{  
-  flex:1;
-  height: 300px;
+{ 
+  width: 90%;
+  height: 100px;
+  border-radius: 45px;
   font-size:20px; 
-  margin:20px 25px 20px 25px;
-  border-style:dashed;
-  border-color: aqua;
+  margin-top:15px;
+  margin-bottom: 15px;
   border-width: 2px;
+  border-style: none;
+  max-width: 863px;
 }
 .css-done
 {
@@ -53,41 +68,46 @@ body
   color:black;
   background-color: lightgreen;
 }
+
 .css-overlay
 {
   position: absolute;
-  top:30px;
-  bottom: 30px;
-  left:300px;
-  right: 300px;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 30px;
-  z-index: 2;
+  top:0px;
+  bottom: 0px;
+  left:0px;
+  right: 0px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.css-close-overlay
+{
+
 }
 .css-user-ip
 {
-  position: absolute;
-  top:30px;
-  bottom: 30px;
-  left:300px;
-  right: 300px;
-  background-color: rgb(255, 255, 255);
+  height: 450px;
+  width:450px;
+  background-color: #85abab;
   border-radius: 30px;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: 1fr;
-  align-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-style: dashed;
+  border-width: 5px;
+  z-index: 5;
 }
+
 .css-task-ip
 {
-  margin:50px;
-  height: 50px;
   font-size: 20px;
-  border-style: dotted;
+  border-style: dashed;
   border-width: 5px;
   border-color: black;
   border-radius: 50px;
-  padding-left: 50px;
+  padding:15px 30px;
 }
 .css-task-ip::placeholder
 {
@@ -105,19 +125,9 @@ body
   font-size: 20px;
   border-style: none;
   border-radius: 50px;
+  padding: 15px 30px;
 }
-.css-close-overlay
-{
-  animation:cubic-bezier(0.23, 1, 0.320, 1) 2s;
-  position: absolute;
-  top:100%;
-  bottom: 100%;
-  left:100%;
-  right:100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 30px;
-  z-index: 2;
-}
+
 .css-progress-bar-div
 {
   position: relative;
@@ -139,7 +149,7 @@ body
   border-radius: 50%;
   height: 220px;
   width: 220px;
-  background-color:black
+  background-color:#85abab;
 }
 .css-progress-bar-div-ptr
 {
@@ -150,16 +160,16 @@ body
   border-radius: 50%;
   background:conic-gradient(from 2deg,transparent 99%,#ff0000 1%);
 }
-@media(min-width: 750px)
+@media (min-width:800)
 {
-   .css-task-box-div
-  { 
-    display: flex;
-    flex-direction: column;
-    border-style: dashed;
-    border-width: 5px;
-    height: 750px;
-    min-width:750px;
-  }
-
+  .css-add-task-btn,.css-task-btn,.css-task-completed
+{  
+  width: 100%;
+  height: 100px;
+  border-radius: 45px;
+  font-size:20px; 
+  margin:15px 25px 15px 25px;
+  border-width: 2px;
+  border-style: none;
+}
 }

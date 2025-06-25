@@ -12,7 +12,7 @@ function LoadData()
   if(!obj)
     {
       task_objs=[]
-      task_objs.push(document.querySelector('.css-task-box-div').innerHTML);
+      task_objs.push(document.querySelector('.buttons-div').innerHTML);
       task_btn_count=1;
       completed_task=0;
     }
@@ -37,7 +37,7 @@ function addTask()
               </div>`
 
       let overlay_div=document.querySelector('.js-overlay') 
-     // overlay_div.classList.add('.css-overlay')             
+      overlay_div.classList.add('css-overlay')             
       overlay_div.innerHTML=askUser
       task_input = document.body.querySelector('.js-task-name')
       task_input.focus()
@@ -62,7 +62,10 @@ function clear_user_prompt()
 {
   let close_window = document.querySelector('.css-user-ip')
   close_window.innerHTML='';
-  close_window.classList.add('css-close-overlay')
+  close_window.classList.remove('css-overlay')
+  let overlay_div=document.querySelector('.js-overlay') 
+  overlay_div.innerHTML=''
+  overlay_div.classList.remove('css-overlay')
 }
 function task_added(word)
   {
@@ -71,7 +74,6 @@ function task_added(word)
         task_btn_count++;
         clear_user_prompt()
         show_tasks()  
-      //  storeLocally();
   }
 
 function show_tasks(reset_val=false)
@@ -81,15 +83,15 @@ let newBTN=''
   for(let i=1;i<task_objs.length;i++){newBTN+=task_objs[i]}
     if(reset_val)
     {
-      document.querySelector('.css-task-box-div').innerHTML=task_objs[0]
+      document.querySelector('.buttons-div').innerHTML=task_objs[0]
     }
   if(task_btn_count<4)
     {
-      document.querySelector('.css-task-box-div').innerHTML=newBTN+task_objs[0]
+      document.querySelector('.buttons-div').innerHTML=newBTN+task_objs[0]
     }
   else if(task_btn_count==4)
     {
-      document.querySelector('.css-task-box-div').innerHTML=newBTN;
+      document.querySelector('.buttons-div').innerHTML=newBTN;
     }
     storeLocally()
      update_progress_bar(completed_task)
@@ -139,7 +141,7 @@ function update_progress_bar(p_val)
   let degree=(3.6*p_val*100)/(task_btn_count-1)
   let ptr_degree = degree+2;
   console.log(degree,p_val,task_btn_count)
-  progress.style.background=`conic-gradient(#2fbaff ${degree}deg, #fff 0deg)`;
+  progress.style.background=`conic-gradient(cornflowerblue ${degree}deg, #fff 0deg)`;
   ptr.style.background=`conic-gradient(from ${ptr_degree}deg,transparent 99%,#ff0000 1%)`
   }
 }
