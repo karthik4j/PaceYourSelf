@@ -34,6 +34,7 @@ function addTask()
       let askUser=`<div class="css-user-ip">
                 <input type="text" placeholder="Task name" class="js-task-name css-task-ip">
                 <button class="js-task-ok css-task-ok">Let's go!</button>
+                <div class="css-input-error"></div>
               </div>`
 
       let overlay_div=document.querySelector('.js-overlay') 
@@ -69,11 +70,20 @@ function clear_user_prompt()
 }
 function task_added(word)
   {
+        if(word.length==0)
+          {
+            let show_error = document.querySelector('.css-input-error')
+            show_error.innerHTML="Task name cannot be empty."
+          }
+        else
+        {
         let newBTN = `<button class='css-task-btn' id="btn${task_btn_count}" onclick="task_complete(${task_btn_count})">${word}</button>`
         task_objs.push(newBTN)
         task_btn_count++;
         clear_user_prompt()
         show_tasks()  
+        }
+
   }
 
 function show_tasks(reset_val=false)
@@ -131,10 +141,11 @@ function update_progress_bar(p_val)
 {
   let progress = document.getElementById('progressbar')
   let ptr = document.getElementById('ptrprogress')
-
+  let percentage_val = document.querySelector('.js-percentage')
   if(p_val===0)
     {
       progress.style.background=`conic-gradient(#fff ${1*3.6*100}deg, #fff 0deg)`
+      percentage_val.innerHTML=`0%`
     }
   else
   {
@@ -143,6 +154,8 @@ function update_progress_bar(p_val)
   console.log(degree,p_val,task_btn_count)
   progress.style.background=`conic-gradient(cornflowerblue ${degree}deg, #fff 0deg)`;
   ptr.style.background=`conic-gradient(from ${ptr_degree}deg,transparent 99%,#ff0000 1%)`
+   progress.style.background=`conic-gradient(#fff ${1*3.6*100}deg, #fff 0deg)`
+  percentage_val.innerHTML=`${Math.round(degree*100/360)}%`
   }
 }
 

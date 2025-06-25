@@ -13,6 +13,7 @@ body
   bottom: 0px;
   left:0px;
   right: 0px;
+
 }
 .css-prog-title-div
 {
@@ -81,10 +82,6 @@ body
   align-items: center;
   justify-content: center;
 }
-.css-close-overlay
-{
-
-}
 .css-user-ip
 {
   height: 450px;
@@ -99,7 +96,12 @@ body
   border-width: 5px;
   z-index: 5;
 }
-
+.css-input-error
+{
+  color:red;
+  margin-top:25px;
+  font-weight: bold;
+}
 .css-task-ip
 {
   font-size: 20px;
@@ -160,16 +162,24 @@ body
   border-radius: 50%;
   background:conic-gradient(from 2deg,transparent 99%,#ff0000 1%);
 }
-@media (min-width:800)
+.js-percentage
 {
-  .css-add-task-btn,.css-task-btn,.css-task-completed
-{  
-  width: 100%;
-  height: 100px;
-  border-radius: 45px;
-  font-size:20px; 
-  margin:15px 25px 15px 25px;
-  border-width: 2px;
-  border-style: none;
+  position: absolute;
+  z-index: 5;
+  font-size: 29px;
+
 }
+@media screen and (max-width:800) 
+{
+  .css-prog-title-div
+  {
+    flex:2;
+    background-color: #0063af;
+  }
+    .css-task-box-div
+  { flex:1;}
+  .buttons-div
+  {
+    flex:1;
+  }
 }
