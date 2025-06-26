@@ -206,7 +206,7 @@ body
 }
 .css-about-page
 {
-  height: 450px;
+  height: 500px;
   width:450px;
   background-color: #85abab;
   border-radius: 30px;
@@ -222,6 +222,10 @@ body
   margin-top:25px;
   margin-left:15px;
   margin-right: 15px;
+}
+.about-title-span
+{
+font-weight: bold;
 }
 @media screen and (max-width:800) 
 {

@@ -1,14 +1,13 @@
-
 function storeLocally()
 {
   let obj =[task_objs,completed_task,task_btn_count]
+  console.log(obj)
   obj = JSON.stringify(obj)
   localStorage.setItem('todo',(obj));
 }
 function LoadData()
 {
   let obj = localStorage.getItem('todo')
- 
   if(!obj)
     {
       task_objs=[]
@@ -25,7 +24,7 @@ function LoadData()
   }
 }
 
- LoadData();
+
 function addTask()
 { 
   let task_input;
@@ -161,7 +160,10 @@ function show_about()
 {
   let question=`<div class="css-about-page">
                   <div class='about-title-span'>About</div>
-                  <div class='about-proj-div'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+                  <div class='about-proj-div'>PaceYourSelf is a todo-list application that is different from a conventional todo-list. It encourages the user to break down their work into manageable parts. At a time, users can only add upto three tasks and they can only add more tasks after completing the previous ones. After completing all three tasks, users can add new tasks that they want to accomplish. By doing this, it encourages them to focus on the task at hand and helps them to feel less overwhelmed. The progress bar lets the user know how much work they have accomplished so far. 
+                  <p></p>
+                  If you have any doubts about how to operate the app, click the help button, which will provide detailed instructions on how to use the app.
+</div>
                   <button class="css-banner-close" onclick=close_banner()>Close</button>
               </div>
               `
@@ -175,12 +177,18 @@ function show_help()
                   <div class='about-title-span'>Help</div>
                   <div class='about-proj-div'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
                   <button class="css-banner-close" onclick=close_banner()>Close</button>
+                  <button class="css-reset-everything css-banner-close" onclick="reset_everything()">Reset everything</button>
               </div>
               `
   let banner = document.querySelector('.js-overlay')
   banner.classList.add('css-overlay')
    banner.innerHTML=question;
 }
+function reset_everything()
+    {   console.log('resetting')
+        localStorage.removeItem('todo')
+        location.reload()
+    }
 function close_banner()
 {
   let banner = document.querySelector('.js-overlay')
@@ -194,8 +202,10 @@ function clear_tasks(index)
   task_btn_count--;
   show_tasks(true);
 }
-update_progress_bar(0);
+ LoadData();
+
 show_tasks()
+update_progress_bar(0);
 //console.log(bt,test)
   //console.log(index)
   //console.log(degree,ptr_degree)
