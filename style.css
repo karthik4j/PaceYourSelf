@@ -27,16 +27,82 @@ body
 }
 .app-title
 {
-  font-size:48px;
-  margin-left: 25px;
+ margin-left: 25px;
 }
+.css-ask
+{
+   border: none;
+   background-color: #9eccf0;
+   font-size: 48px;
+   font-family: Arial, Helvetica, sans-serif;
+}
+.css-hidden-bar
+{
+  margin-top: 5px;
+  opacity: 0;
+  border: black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.css-ask:hover ~ .css-hidden-bar
+{
+  opacity: 100;
+}
+.css-hidden-bar:hover
+{
+  opacity: 100;
+}
+.css-about-page
+{
+  height: 500px;
+  width:450px;
+  background-color: #85abab;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  border-width: 5px;
+  font-size: 18px;
+}
+.nav-btn-css
+{
+  border-style: none;
+  padding: 15px 30px;
+      font-size: 18px;
+      background:#85abab;
+
+}
+.css-banner-close
+{
+   border-style: none;
+  padding: 15px 30px;
+  justify-content: space-between;
+  background:#9eccf0;
+  opacity: 100;
+  font-size: 18px;
+}
+.about-title-span,.css-banner-close,.about-proj-div
+{
+  margin-top:25px;
+  margin-left:15px;
+  margin-right: 15px;
+}
+.about-title-span
+{
+font-weight: bold;
+}
+
 .css-task-box-div
 { flex:1;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-   max-height: 500px;
+  position: relative;
+ 
 }
 .buttons-div
 {
@@ -46,6 +112,43 @@ body
   align-items: center;
   justify-content: center;
   max-height: 500px;
+  position: relative;
+  z-index: 1;
+  
+}
+
+.misc-task-div
+{
+  flex:1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:center;
+  position: relative;
+}
+.misc-indicator
+{
+  flex:1;
+  margin-top: 25px;
+  font-size: 20px;
+  color: white;
+}
+
+.misc-task-list
+{
+  display: flex;
+  flex-direction: column  ;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.imp-buttons-list
+{
+  display: flex;
+  flex-direction: column  ;
+  align-items: center;
+  justify-content: center;
+  width: 100%; 
 }
 .css-add-task-btn,.css-task-btn,.css-task-completed
 { 
@@ -58,12 +161,6 @@ body
   border-width: 2px;
   border-style: none;
   max-width: 863px;
-}
-.css-done
-{
-  margin:25px;
-  font-size: 20px;
-  padding: 10px 12px;
 }
 .css-task-completed
 {
@@ -83,6 +180,7 @@ body
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  z-index: 2;
 }
 .css-user-ip
 {
@@ -115,7 +213,6 @@ body
 }
 .css-task-ip::placeholder
 {
-  
   color:palevioletred
 }
 .css-task-ip:focus
@@ -171,62 +268,25 @@ body
   font-size: 29px;
 
 }
-.css-hidden-bar
-{
-  font-size: 29px;
-  color: #fff;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  bottom: 0px;
-  height: 100px;
-  width: 100%;
-}
+/*
+
 .css-hidden-bar span
 {
     font-size:50px;
 }
-.nav-btn-css
-{
-  opacity: 0;
-  border-style: none;
-  padding: 15px 30px;
 
-}
 .css-hidden-bar:hover .nav-btn-css,.css-banner-close
 {
     border-style: none;
   padding: 15px 30px;
   justify-content: space-between;
-  background:#9eccf0;
+
   opacity: 100;
-    font-size: 18px;
+
 }
-.css-about-page
-{
-  height: 500px;
-  width:450px;
-  background-color: #85abab;
-  border-radius: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-  border-width: 5px;
-  font-size: 18px;
-}
-.about-title-span,.css-banner-close,.about-proj-div
-{
-  margin-top:25px;
-  margin-left:15px;
-  margin-right: 15px;
-}
-.about-title-span
-{
-font-weight: bold;
-}
+
+*/
+
 @media screen and (max-width:800) 
 {
   .css-prog-title-div
@@ -236,7 +296,7 @@ font-weight: bold;
   }
     .css-task-box-div
   { flex:1;}
-  .buttons-div
+  .js-imp-task
   {
     flex:1;
   }

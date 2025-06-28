@@ -8,27 +8,38 @@
   <body>
     <div class="css-ui-box">
           <div class="js-overlay"></div>
-          <div class="css-prog-title-div">
-            <h1 class="app-title">PaceYourSelf</h1>
-         
+            <div class="css-prog-title-div">
+              <div class="app-title">
+                <button class="css-ask">PaceYourSelf</button>
+
+              <div class="css-hidden-bar">
+                <button class="about-css nav-btn-css" onclick="show_about()">About</button>
+                <button class="help-css nav-btn-css" onclick="show_help()">Help</button>
+              </div>
+
+              </div>         
             <div class="css-progress-bar-div" id="progressbar">
                           <div class="js-percentage">%</div>
                           <div class="css-progress-bar-div-ptr" id="ptrprogress"></div>
             </div>
           </div>
           <div class="css-task-box-div">
-            <div class="buttons-div">
-                                        <button class="js-btn-add css-add-task-btn" 
-            onclick="addTask()">Add a new task</button>
+
+              <div class="buttons-div">
+                  <div class="misc-indicator">Important tasks</div>  
+                  <div class="imp-buttons-list">
+                      <button class="js-btn-add css-add-task-btn" onclick="addTask('imp')">Add a new task</button>
+                  </div>          
+              </div>
+          
+              <div class="misc-task-div">
+                  <div class="misc-indicator">Misc. Task</div>
+                  <div class="misc-task-list">
+                      <button class="js-btn-add css-add-task-btn" onclick="addTask('misc')">Add a new task</button>
+                  </div>
+              </div>
             </div>
-            </div>
-          <div class="css-hidden-bar">
-            <button class="about-css nav-btn-css" onclick="show_about()">About</button>
-            <span>···</span>
-            <button class="help-css nav-btn-css" onclick="show_help()">Help</button>
-          </div>
     </div>
   </body>
-
   <script src="index.js"></script>
 </html>
