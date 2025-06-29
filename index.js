@@ -1,15 +1,19 @@
-
+let MiscActiveBtn=2;
+let ImpActiveBtn=1;
+let ImpCompletedTask=0;
+let MiscCompletedTask = 0;
 function storeLocally()
 {
+  //loop to fetch contents from the misc div
+  let misc_task_btns = document.querySelectorAll('.css-task-btn')
+  MiscTaskList=[]
+  misc_task_btns.forEach(bt => {
 
-  let obj =[impTaskLists,ImpCompletedTask,ImpActiveBtn];
-  MiscObj=[MiscTaskList,MiscCompletedTask,MiscActiveBtn];
-  obj = JSON.stringify(obj)
-  MiscObj = JSON.stringify(MiscObj);
-
-  localStorage.setItem('todo',(obj));
-  localStorage.setItem('todo-misc',MiscObj)
-
+    if(bt.id.includes('Misc'))
+      {
+        MiscTaskList.push(bt.outerHTML)
+      }
+  });
 }
 function LoadData()
 {
@@ -17,8 +21,8 @@ function LoadData()
   if(!obj)
     {
       impTaskLists=[]
-      impTaskLists.push(document.querySelector('.imp-buttons-list').innerHTML);
-      ImpActiveBtn=1;
+      impTaskLists.
+      ImpActiveBtn=2;
       ImpCompletedTask=0;
     }
   else
@@ -34,7 +38,8 @@ function LoadData()
     {
       MiscTaskList=[]
       MiscTaskList.push(document.querySelector('.misc-task-list').innerHTML);
-      MiscActiveBtn=1;
+      MiscTaskList.push('');
+      MiscActiveBtn=2;
       MiscCompletedTask=0;
     }
   else
@@ -84,48 +89,25 @@ function addTask(task_type)
     {
       if(ImpActiveBtn<4)
         {
-          let askUser=`<div class="css-user-ip">
-                    <input type="text" placeholder="Task name" class="js-task-name css-task-ip">
-                    <button class="js-task-ok css-task-ok">Let's go!</button>
-                    <div class="css-input-error"></div>
-                  </div>`
-
-          let overlay_div=document.querySelector('.js-overlay') 
-          overlay_div.classList.add('css-overlay')             
-          overlay_div.innerHTML=askUser
-          task_input = document.body.querySelector('.js-task-name')
-          task_input.focus()
-          task_input.addEventListener('keydown',(event)=>
-            {
-              if(event.key=='Enter')
-                {
-                  task_added(task_input.value,task_type);
-                  task_input.value='';
-                }
-            })
-
-          document.querySelector('.js-task-ok').addEventListener('click',()=>
-            {
-              task_added(task_input.value,task_type)        
-              task_input.value='';
-            })
-              
+          askTask('imp')
         }
     }
   else if(task_type==='misc')
     {
-      let reset_task_btn = `<button id='reset_tasks' class='css-add-task-btn' onclick="clear_tasks(0,'misc')">Clear tasks</button>`     
-
-      if(MiscActiveBtn==1)
+      if(MiscActiveBtn==2)
         {
-          askTask('misc')
-          MiscTaskList.push(reset_task_btn)
-         // show_tasks('misc')
+          let misc_task_div = document.querySelector('.misc-task-div')
+          let add = document.createElement('button')
+          add.classList.add('css-remove-task')
+          add.id='reset-tasks'
+          add.innerHTML='Clear tasks'
+          add.addEventListener('click',()=>{clear_tasks('misc')})
+          misc_task_div.append(add)
+          askTask(task_type)
         }
       else
       {
-        askTask(task_type)
-        //show_tasks('misc')
+         askTask(task_type)
       }
     }
 }
@@ -150,149 +132,128 @@ function task_added(word,task_type)
         {
           if(task_type==="imp")
             {
-              let newBTN = `<button class='css-task-btn' id="btn${ImpActiveBtn}" onclick="task_complete(${ImpActiveBtn},'imp')">${word}</button>`
-              impTaskLists.push(newBTN)
-              ImpActiveBtn++;
-              clear_user_prompt()
-              show_tasks("imp") 
+              let imp_task_div = document.querySelector('.imp-buttons-list');
+              
+              let newBTN = document.createElement('button')
+              newBTN.classList.add('css-task-btn')
+              newBTN.id = ImpActiveBtn
+              ImpActiveBtn++
+              newBTN.innerHTML=word;
+              newBTN.addEventListener('click',()=>{task_complete(newBTN.id,'imp')})
+              imp_task_div.append(newBTN)
+              clear_user_prompt() 
+
+                if(ImpActiveBtn==4)
+                {
+                  let btn = document.getElementById('ImpAdd')
+                  btn.remove()
+                }
             }
           else if(task_type==="misc")
             {
-              let newBTN = `<button class='css-task-btn' id="Miscbtn${MiscActiveBtn}" onclick="task_complete(${MiscActiveBtn},'misc')">${word}</button>`;   
-     
-              MiscTaskList.push(newBTN)
+             // let newBTN = `<button class='css-task-btn' id="Miscbtn${MiscActiveBtn}" onclick="task_complete(${MiscActiveBtn},'misc')">${word}</button>`;   
+              let misc_task_div = document.querySelector('.misc-task-div')
+
+              let newBTN=document.createElement('button')
+              newBTN.innerHTML=word;
+              newBTN.id=`Misc${MiscActiveBtn}`
               MiscActiveBtn++;
+              newBTN.classList.add('css-task-btn')
+              newBTN.addEventListener('click',()=>{task_complete(newBTN.id,'misc')})
+              misc_task_div.append(newBTN)
               clear_user_prompt()
-              show_tasks('misc')
             }
         }
-      
+
+      update_progress_bar(calc_percent())
+  
   }
 
-function show_tasks(task_type)
+function re_add_start()
 {
-let newBTN=''
- 
-  if(task_type==="imp")
-    {
-      for(let i=1;i<impTaskLists.length;i++){newBTN+=impTaskLists[i]}
+  //<button class="js-btn-add css-add-task-btn" onclick="addTask('imp')">Add a new task</button>
+  let btn = document.createElement('button')
+  let imp_div = document.querySelector('.imp-buttons-list')
 
-    if(ImpActiveBtn<4)
-      {
-        document.querySelector('.imp-buttons-list').innerHTML=newBTN+impTaskLists[0]
-      }
-    else if(ImpActiveBtn==4)
-      {
-        document.querySelector('.imp-buttons-list').innerHTML=newBTN;
-      }
-    }
-  else
-  {  
-      newBTN='';
-     // console.log('before displaying',MiscTaskList)
-      let dupe=''
-      for(let i=1;i<MiscTaskList.length;i++)
-        {
-          newBTN+=MiscTaskList[i]
-        }
-      let misc_task_div = document.getElementById('misc_task_new')
-      let words= document.querySelector('.misc-task-list').innerHTML
-
-      document.querySelector('.misc-task-list').innerHTML=newBTN+MiscTaskList[0]
-
-  }
-
-     storeLocally()
-     update_progress_bar(ImpCompletedTask)
+  btn.classList.add('js-btn-add')
+  btn.classList.add('css-add-task-btn')
+  btn.addEventListener('click',()=>{addTask('imp')})
+  btn.innerHTML='Add a new Task'
+  btn.id='ImpAdd'
+  imp_div.append(btn)
+  ImpActiveBtn=1
 }
 function task_complete(bt,task_type)
 {
   if(task_type === 'imp')
     {
-      let button = document.getElementById(`btn${bt}`)
-      let  test= button.classList.contains('css-task-completed')
-
-      if(test===false)
-      {
-        button.classList.add('css-task-completed')
-        button=button.outerHTML
-        impTaskLists[bt]=button;
-        ImpCompletedTask++;
-        update_progress_bar(ImpCompletedTask)
-      }
-      if(ImpCompletedTask==3)
-      {
-        setTimeout(()=>{ 
-        clear_tasks(1,'imp');
-        clear_tasks(2,'imp');
-        clear_tasks(3,'imp');
-        update_progress_bar(0);
-        show_tasks("imp");
-      },1000);
-
-        ImpCompletedTask=0;
-      }
+      let btn = document.getElementById(bt)
+      if(btn.classList.contains('css-task-completed'))
+        {
+          ImpCompletedTask--
+          btn.classList.remove('css-task-completed')
+        }
       else
       {
-        show_tasks("imp");
+        ImpCompletedTask++;
+        btn.classList.add('css-task-completed')
+        
+          if(ImpCompletedTask===3)
+            {
+                setTimeout(()=>
+                  {                  
+                  clear_tasks('imp');
+                  ImpCompletedTask=0;
+                  ImpActiveBtn=0;
+                  re_add_start();
+                  },1000)
+            }
       }
-       storeLocally();
+                  
+
     }
-  else if(task_type == 'misc')
+    else if(task_type == 'misc')
     {
-      console.log('before adding',MiscTaskList)
-
-      let button = document.getElementById(`Miscbtn${bt}`)
-  
-      let index = MiscTaskList.indexOf(button.outerHTML)
-      console.log(button.getHTML,MiscTaskList[bt])
-      console.log('button',button.outerHTML,`\n`,'highlighted','index',index);
-
-      let  test= button.classList.contains('css-task-completed')
-
-      if(test===false)
+      let btn = document.getElementById(bt)
+      if(btn.classList.contains('css-task-completed'))
         {
-        button.classList.add('css-task-completed')
-        button=button.outerHTML
-        MiscTaskList[index]=button
+          MiscCompletedTask--
+          btn.classList.remove('css-task-completed')
+        }
+      else
+      {
         MiscCompletedTask++;
-        //show_tasks('misc')
-         //storeLocally();
-        }
-      else if(test===true)
-        {
-          button.classList.remove('css-task-completed')
-          console.log(`current button`,button,index)
-          button=button.outerHTML;
-          MiscTaskList[index]=button;
-          MiscCompletedTask--;
-          console.log(`after removal button`,button,index)
-         // show_tasks('misc')
-        }
-        show_tasks('misc')
+        btn.classList.add('css-task-completed')
+      }
     }
-
-   
+  update_progress_bar(calc_percent())
 }
+function calc_percent()
+{
+  let nos_imp = document.querySelector('.imp-buttons-list')
+  nos_imp = nos_imp.querySelectorAll('.css-task-btn').length
 
+  let nos_misc = document.querySelector('.misc-task-div')
+  nos_misc = nos_misc.querySelectorAll('.css-task-btn').length
+         // console.log(nos_misc)
+  let total_btns = nos_imp+nos_misc;
+  let percentage = (MiscCompletedTask+ImpCompletedTask)/total_btns
+  console.log(percentage*100,'%')
+  console.log('misc count:',MiscCompletedTask,'misc active:',nos_misc)
+    console.log('imp count:',ImpCompletedTask,'imp active:',nos_misc)
+  return percentage*100
+}
 function update_progress_bar(p_val)
 {
   let progress = document.getElementById('progressbar')
   let ptr = document.getElementById('ptrprogress')
   let percentage_val = document.querySelector('.js-percentage')
-  if(p_val===0)
-    {
-      progress.style.background=`conic-gradient(#fff ${1*3.6*100}deg, #fff 0deg)`
-      percentage_val.innerHTML=`0%`
-    }
-  else
-  {
-  let degree=(3.6*p_val*100)/(ImpActiveBtn-1)
+
+  let degree=(3.6*p_val)
   let ptr_degree = degree+2;
   progress.style.background=`conic-gradient(cornflowerblue ${degree}deg, #fff 0deg)`;
   ptr.style.background=`conic-gradient(from ${ptr_degree}deg,transparent 99%,#ff0000 1%)`
   percentage_val.innerHTML=`${Math.round(degree*100/360)}%`
-  }
 }
 
 function show_about()
@@ -335,42 +296,40 @@ function close_banner()
   banner.classList.remove('css-overlay')
   banner.innerHTML='';
 }
-function clear_tasks(index,task_type)
+function clear_tasks(task_type)
 {
 
   if(task_type==='imp')
     {
-        index = impTaskLists.indexOf(`<button class='css-task-btn' onclick="task_complete(${index})">Task ${index}</button>`)
-        impTaskLists.splice(index,1)
-        ImpActiveBtn--;
-        show_tasks('imp');
+      let buttons = document.querySelectorAll('.css-task-completed')
+
+      buttons.forEach(bt => {
+        if(bt.id.includes('Misc')===false)
+          {
+            bt.remove()
+            ImpCompletedTask--;
+          }
+      });
     }
 
   else if(task_type === 'misc')
     {    
-      console.log(MiscTaskList)
       let buttons = document.querySelectorAll('.css-task-completed')
-     // console.log(buttons)
-      buttons.forEach(bt => {
-      //  console.log(bt)
+      console.log('clearing misc')
+      buttons.forEach(bt => { 
+
         if(bt.id.includes('Misc'))
           {
-            let index = bt.id
-            let bt_text = bt.innerHTML;
-            //console.log(bt_text)
-            let bt_outer = `<button class="css-task-btn css-task-completed" id="${index}" onclick="task_complete(${index.replace('Miscbtn','')},'misc')">${bt_text}</button>`
-            //console.log(bt_outer)
-            index = MiscTaskList.indexOf(bt_outer)
-            console.log('index of button to be deleted',index)
-            MiscTaskList = MiscTaskList.toSpliced(index,1)
-           // MiscActiveBtn--;
+            bt.remove()
+            MiscCompletedTask--;
           }
       });
-      show_tasks('misc')
-     console.log(MiscTaskList)
     }
+      update_progress_bar(calc_percent())
 }
- LoadData();
-show_tasks('imp')
-show_tasks('misc')
+ 
+//LoadData();
+
+//show_tasks('imp')
+//show_tasks('misc')
 update_progress_bar(0);

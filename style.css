@@ -150,7 +150,7 @@ font-weight: bold;
   justify-content: center;
   width: 100%; 
 }
-.css-add-task-btn,.css-task-btn,.css-task-completed
+.css-task-btn,.css-task-completed,.css-add-task-btn,.css-remove-task
 { 
   width: 90%;
   height: 100px;
@@ -161,6 +161,11 @@ font-weight: bold;
   border-width: 2px;
   border-style: none;
   max-width: 863px;
+}
+.css-remove-task
+{
+  border:5px solid lightcoral;
+  /*box-shadow:inset -0px -0px 14px 7px rgb(255, 182, 193);*/
 }
 .css-task-completed
 {
