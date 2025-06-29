@@ -5,52 +5,115 @@ let MiscCompletedTask = 0;
 function storeLocally()
 {
   //loop to fetch contents from the misc div
-  let misc_task_btns = document.querySelectorAll('.css-task-btn')
-  MiscTaskList=[]
+  let misc_task_btns = document.querySelector('.misc-task-list').querySelectorAll('.css-task-btn')
+  let MiscTasks=[]
   misc_task_btns.forEach(bt => {
 
     if(bt.id.includes('Misc'))
       {
-        MiscTaskList.push(bt.outerHTML)
+       
+        let task_names = bt.innerHTML
+        let task_state = bt.classList.contains('css-task-completed')?"css-task-btn css-task-completed":"css-task-btn"
+        MiscTasks.push({task_name:task_names,task_state:task_state})
+      //  console.log(task_name,task_state)
       }
   });
+
+
+    //loop to fetch contents from the important task div
+  let imp_task_btns = document.querySelector('.imp-buttons-list').querySelectorAll('.css-task-btn')
+  let ImpTasks=[]
+  imp_task_btns.forEach(bt => {
+        let task_names = bt.innerHTML
+        let task_state = bt.classList.contains('css-task-completed')?"css-task-btn css-task-completed":"css-task-btn"
+        ImpTasks.push({task_name:task_names,task_state:task_state})
+  });
+
+  localStorage.setItem('todo-important',JSON.stringify(ImpTasks))
+  localStorage.setItem('todo-misc',JSON.stringify(MiscTasks))
+  
 }
 function LoadData()
 {
-  let obj = localStorage.getItem('todo')
-  if(!obj)
-    {
-      impTaskLists=[]
-      impTaskLists.
-      ImpActiveBtn=2;
-      ImpCompletedTask=0;
+  let obj1 = localStorage.getItem('todo-important')
+  let obj2 = localStorage.getItem('todo-misc')
+  obj1 = JSON.parse(obj1)
+  obj2 = JSON.parse(obj2)
+
+  if(obj1)
+    { 
+          console.log(ImpActiveBtn)
+          //adds important tasks
+          for(let i=0;i<obj1.length;i++)
+          {
+            let obj = obj1[i]
+            add_button_to_screen(obj.task_name,obj.task_state,'imp')
+            ImpActiveBtn++;
+          }
+            //count all obs in important task div and then store it
+
+            let nos_imp = document.querySelector('.imp-buttons-list')
+            ImpActiveBtn = nos_imp.querySelectorAll('.css-task-btn').length
+        
+            //we can resue nos_imp as it is local
+            nos_imp_ = document.querySelector('.imp-buttons-list')
+            ImpCompletedTask = nos_imp.querySelectorAll('.css-task-completed').length
+
+            if(ImpActiveBtn===3)
+              {
+                  let btn = document.getElementById('ImpAdd')
+                  if(btn){btn.remove()}
+              }
+            else
+            {
+              ImpActiveBtn+=1;
+            }
+
+            console.log('IMP ACTIVE:',ImpActiveBtn,"IMP COM",ImpCompletedTask)
     }
-  else
-  {
-     obj = JSON.parse(obj)
-    impTaskLists = obj[0];
-    ImpCompletedTask=obj[1];
-    ImpActiveBtn=obj[2];
-  }
+  if(obj2)
+    {     
+          if(obj2.length>0)
+            {
+              let misc_task_div = document.querySelector('.misc-task-list')
+              let add = document.createElement('button')
+              add.classList.add('css-remove-task')
+              add.id='reset-tasks'
+              add.innerHTML='Clear tasks'
+              add.addEventListener('click',()=>{clear_tasks('misc')})
+              misc_task_div.append(add)
+              MiscActiveBtn=2
+            }
+
+          //adds misc tasks
+          for(let i=0;i<obj2.length;i++)
+            {
+              let obj = obj2[i]
+              add_button_to_screen(obj.task_name,obj.task_state,'misc')
+               MiscActiveBtn++
+            }
+          //count all obs in misc task div and then store it
+          if(MiscActiveBtn!==2)
+            {
+              let nos_misc = document.querySelector('.misc-task-list')
+              MiscActiveBtn = nos_misc.querySelectorAll('.css-task-btn').length
+              MiscActiveBtn+=2;
+            }
+          //we can resue nos_misc as it is local
+           nos_misc = document.querySelector('.misc-task-list')
+          MiscCompletedTask = nos_misc.querySelectorAll('.css-task-completed').length
+         // if(MiscActiveBtn===0){MiscActiveBtn=2}
+          console.log('MISC ACTIVE:',MiscActiveBtn,"MISC COM",MiscCompletedTask)
+
   
-  let MiscObj = localStorage.getItem('todo-misc')
-  if(!MiscObj)
-    {
-      MiscTaskList=[]
-      MiscTaskList.push(document.querySelector('.misc-task-list').innerHTML);
-      MiscTaskList.push('');
-      MiscActiveBtn=2;
-      MiscCompletedTask=0;
     }
-  else
+
+if(ImpActiveBtn===4)
   {
-    MiscObj = JSON.parse(MiscObj)
-    MiscTaskList = MiscObj[0];
-    MiscCompletedTask=MiscObj[1];
-    MiscActiveBtn=MiscObj[2];
+    console.log('error')
+    document.getElementById(id="ImpAdd").remove()
   }
 }
-
 
 function askTask(task_type)
 {
@@ -96,7 +159,7 @@ function addTask(task_type)
     {
       if(MiscActiveBtn==2)
         {
-          let misc_task_div = document.querySelector('.misc-task-div')
+          let misc_task_div = document.querySelector('.misc-task-list')
           let add = document.createElement('button')
           add.classList.add('css-remove-task')
           add.id='reset-tasks'
@@ -120,6 +183,36 @@ function clear_user_prompt()
   overlay_div.innerHTML=''
   overlay_div.classList.remove('css-overlay')
 }
+function add_button_to_screen(word,class_list,btn_type)
+{
+  if(btn_type==='imp')
+    {
+              let imp_task_div = document.querySelector('.imp-buttons-list');
+              
+              let newBTN = document.createElement('button')
+              class_list.split(" ").forEach(class_type=>{
+                   newBTN.classList.add(class_type)
+              })
+              newBTN.id = ImpActiveBtn
+              
+              newBTN.innerHTML=word;
+              newBTN.addEventListener('click',()=>{task_complete(newBTN.id,'imp')})
+              imp_task_div.append(newBTN)
+    }
+  else if(btn_type==='misc')
+    {
+              let misc_task_div = document.querySelector('.misc-task-list')
+
+              let newBTN=document.createElement('button')
+              newBTN.innerHTML=word;
+              newBTN.id=`Misc${MiscActiveBtn}`
+              class_list.split(" ").forEach(class_type=>{
+                   newBTN.classList.add(class_type)
+              })
+              newBTN.addEventListener('click',()=>{task_complete(newBTN.id,'misc')})
+              misc_task_div.append(newBTN)
+    }
+}
 function task_added(word,task_type)
   {
         
@@ -132,16 +225,13 @@ function task_added(word,task_type)
         {
           if(task_type==="imp")
             {
-              let imp_task_div = document.querySelector('.imp-buttons-list');
-              
-              let newBTN = document.createElement('button')
-              newBTN.classList.add('css-task-btn')
-              newBTN.id = ImpActiveBtn
-              ImpActiveBtn++
-              newBTN.innerHTML=word;
-              newBTN.addEventListener('click',()=>{task_complete(newBTN.id,'imp')})
-              imp_task_div.append(newBTN)
-              clear_user_prompt() 
+              if(ImpActiveBtn<4)
+                {
+                  add_button_to_screen(word,'css-task-btn','imp')
+                  ImpActiveBtn++
+                  clear_user_prompt() 
+                }
+
 
                 if(ImpActiveBtn==4)
                 {
@@ -152,15 +242,8 @@ function task_added(word,task_type)
           else if(task_type==="misc")
             {
              // let newBTN = `<button class='css-task-btn' id="Miscbtn${MiscActiveBtn}" onclick="task_complete(${MiscActiveBtn},'misc')">${word}</button>`;   
-              let misc_task_div = document.querySelector('.misc-task-div')
-
-              let newBTN=document.createElement('button')
-              newBTN.innerHTML=word;
-              newBTN.id=`Misc${MiscActiveBtn}`
-              MiscActiveBtn++;
-              newBTN.classList.add('css-task-btn')
-              newBTN.addEventListener('click',()=>{task_complete(newBTN.id,'misc')})
-              misc_task_div.append(newBTN)
+              add_button_to_screen(word,'css-task-btn','misc')
+              MiscActiveBtn++
               clear_user_prompt()
             }
         }
@@ -206,6 +289,7 @@ function task_complete(bt,task_type)
                   ImpCompletedTask=0;
                   ImpActiveBtn=0;
                   re_add_start();
+                  ImpActiveBtn=1;
                   },1000)
             }
       }
@@ -233,27 +317,38 @@ function calc_percent()
   let nos_imp = document.querySelector('.imp-buttons-list')
   nos_imp = nos_imp.querySelectorAll('.css-task-btn').length
 
-  let nos_misc = document.querySelector('.misc-task-div')
+  let nos_misc = document.querySelector('.misc-task-list')
   nos_misc = nos_misc.querySelectorAll('.css-task-btn').length
-         // console.log(nos_misc)
+         
   let total_btns = nos_imp+nos_misc;
   let percentage = (MiscCompletedTask+ImpCompletedTask)/total_btns
-  console.log(percentage*100,'%')
-  console.log('misc count:',MiscCompletedTask,'misc active:',nos_misc)
-    console.log('imp count:',ImpCompletedTask,'imp active:',nos_misc)
+
+  if(percentage===NaN){return 0}
   return percentage*100
 }
 function update_progress_bar(p_val)
 {
+
   let progress = document.getElementById('progressbar')
   let ptr = document.getElementById('ptrprogress')
   let percentage_val = document.querySelector('.js-percentage')
 
   let degree=(3.6*p_val)
   let ptr_degree = degree+2;
+    if(!p_val)
+    {
+      progress.style.background=`conic-gradient(cornflowerblue ${0}deg, #fff 0deg)`;
+      ptr.style.background=`conic-gradient(from ${2}deg,transparent 99%,#ff0000 1%)`
+      percentage_val.innerHTML=`0%`
+    }
+  else
+  {
   progress.style.background=`conic-gradient(cornflowerblue ${degree}deg, #fff 0deg)`;
   ptr.style.background=`conic-gradient(from ${ptr_degree}deg,transparent 99%,#ff0000 1%)`
   percentage_val.innerHTML=`${Math.round(degree*100/360)}%`
+  }
+
+  storeLocally();
 }
 
 function show_about()
@@ -286,8 +381,9 @@ function show_help()
 }
 function reset_everything()
     {  
-        localStorage.removeItem('todo')
+        localStorage.removeItem('todo-important')
         localStorage.removeItem('todo-misc')
+        localStorage.removeItem('pointer')
         location.reload()
     }
 function close_banner()
@@ -308,6 +404,7 @@ function clear_tasks(task_type)
           {
             bt.remove()
             ImpCompletedTask--;
+            ImpActiveBtn=1
           }
       });
     }
@@ -315,7 +412,7 @@ function clear_tasks(task_type)
   else if(task_type === 'misc')
     {    
       let buttons = document.querySelectorAll('.css-task-completed')
-      console.log('clearing misc')
+     
       buttons.forEach(bt => { 
 
         if(bt.id.includes('Misc'))
@@ -328,8 +425,12 @@ function clear_tasks(task_type)
       update_progress_bar(calc_percent())
 }
  
-//LoadData();
+LoadData();
 
 //show_tasks('imp')
 //show_tasks('misc')
+  //console.log(percentage*100,'%')
+  //console.log('misc count:',MiscCompletedTask,'misc active:',nos_misc)
+   // console.log('imp count:',ImpCompletedTask,'imp active:',nos_misc)
+   // console.log(nos_misc)
 update_progress_bar(0);
