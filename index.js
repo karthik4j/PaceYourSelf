@@ -355,7 +355,8 @@ function show_about()
 {
   let question=`<div class="css-about-page">
                   <div class='about-title-span'>About</div>
-                  <div class='about-proj-div'>PaceYourSelf is a todo-list application that is different from a conventional todo-list. It encourages the user to break down their work into manageable parts. At a time, users can only add upto three tasks and they can only add more tasks after completing the previous ones. After completing all three tasks, users can add new tasks that they want to accomplish. By doing this, it encourages them to focus on the task at hand and helps them to feel less overwhelmed. The progress bar lets the user know how much work they have accomplished so far. 
+                  <div class='about-proj-div'>PaceYourSelf is a todo-list application that is different from a conventional todo-list. It encourages the user to break down their work into manageable parts. It divides tasks into two categories, Important and Miscellaneous. At a time, users can only add 3 important tasks, which helps them prioritize important tasks and manage time. If some tasks is not that important, it can be added to the Miscellaneous section. 
+Under this section, users may add as many tasks as they want.  To learn how to use the app, refer to the help section on the page.
                   <p></p>
                   If you have any doubts about how to operate the app, click the help button, which will provide detailed instructions on how to use the app.
 </div>
@@ -370,7 +371,27 @@ function show_help()
 {
   let question=`<div class="css-about-page">
                   <div class='about-title-span'>Help</div>
-                  <div class='about-proj-div'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+                  <div class='about-proj-div'>The PaceYourSelf app was designed to be intuitive to users but some users may still have doubts about how to use the app. In that case, this tutorial serves to help them.
+
+                  The tasks in this app are categorized into two, "Important" and "Miscellaneous".
+                  You can only add three important task at a time. You can add more important tasks only after you complete all three of them. When all three tasks are completed. The app will automatically remove them and you can add new tasks.
+
+                  Miscellaneous tasks are those which you wish to complete if possible, but it's not that important if you don't. You can use this section to note down any thoughts that comes to your mind while performing one of the important tasks. Users can add as many Miscellaneous tasks as you want.
+                  A "Clear tasks" button is provided so that users can clear completed tasks. The app does not remove Miscellaneous tasks automatically, providing more granular control to the user.
+
+                  The user can add tasks to any of the section by clicking the "Add a new task" button.
+                  A window will pop-up so that you can enter the task. You may use the enter key to set the task.
+                  Users can also add a task to the list by clicking the "Let's go" button.
+
+                  To mark a task as completed, you can press the task name and it will change its color to a light-green color to indicate that it has been marked complete. If you click the task name again, it changes the state from complete to incomplete.
+
+                  The progress bar is used to visually represent the user's progress. 
+                  It takes into account both Important and Miscellaneous task completion status.
+                  On completing any of these tasks, the progress bar is automatically updated.
+
+                  The "Reset everything" button has been provided to remove all tasks from the app. On clicking this button it removes every tasks (whether complete or not) from the screen and also deletes it from the local storage. Only use this feature when you are sure that you know what you are doing.
+
+                  For more info about this project, you can visit my GitHub page.</div>
                   <button class="css-banner-close" onclick=close_banner()>Close</button>
                   <button class="css-reset-everything css-banner-close" onclick="reset_everything()">Reset everything</button>
               </div>
