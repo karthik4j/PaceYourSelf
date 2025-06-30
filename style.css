@@ -94,7 +94,25 @@ body
 {
 font-weight: bold;
 }
-
+.css-help-page
+{
+  background-color: #85abab;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  border-width: 5px;
+  font-size: 18px;
+    margin-top:25px;
+  margin-left:15px;
+  z-index: 6;
+  margin-right: 15px;
+}
+.css-reset-everything 
+{
+  margin-bottom: 25px;
+}
 .css-task-box-div
 { flex:1;
   display: flex;
@@ -185,7 +203,7 @@ font-weight: bold;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  z-index: 2;
+  z-index: 6;
 }
 .css-user-ip
 {
@@ -292,17 +310,22 @@ font-weight: bold;
 
 */
 
-@media screen and (max-width:800) 
+@media (max-width:760px) 
 {
-  .css-prog-title-div
-  {
-    flex:2;
-    background-color: #0063af;
+  .css-task-box-div
+  { flex:1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  
   }
-    .css-task-box-div
-  { flex:1;}
-  .js-imp-task
+  .buttons-div
   {
-    flex:1;
+    width: 90%;
   }
+  .misc-task-div {
+	width: 90%;
+}
 }
