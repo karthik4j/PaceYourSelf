@@ -83,12 +83,14 @@ body
   background:#9eccf0;
   opacity: 100;
   font-size: 18px;
+   margin-bottom: 25px;
 }
 .about-title-span,.css-banner-close,.about-proj-div
 {
   margin-top:25px;
   margin-left:15px;
   margin-right: 15px;
+ 
 }
 .about-title-span
 {
