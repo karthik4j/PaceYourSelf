@@ -329,3 +329,22 @@ font-weight: bold;
 	width: 90%;
 }
 }
+@media (max-width:400px)
+{
+  .css-task-box-div
+  { flex:1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  
+  }
+  .buttons-div
+  {
+    width: 90%;
+  }
+  .misc-task-div {
+	width: 90%;
+}
+}
