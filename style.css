@@ -350,3 +350,12 @@ font-weight: bold;
 	width: 90%;
 }
 }
+
+@media (max-width:1500px)
+{
+  .css-help-page
+  {
+  margin-top:300px;
+
+  }
+}

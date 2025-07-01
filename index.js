@@ -42,7 +42,7 @@ function LoadData()
 
   if(obj1)
     { 
-          console.log(ImpActiveBtn)
+        //  console.log(ImpActiveBtn)
           //adds important tasks
           for(let i=0;i<obj1.length;i++)
           {
@@ -69,7 +69,7 @@ function LoadData()
               ImpActiveBtn+=1;
             }
 
-            console.log('IMP ACTIVE:',ImpActiveBtn,"IMP COM",ImpCompletedTask)
+        //    console.log('IMP ACTIVE:',ImpActiveBtn,"IMP COM",ImpCompletedTask)
     }
   if(obj2)
     {     
@@ -103,9 +103,8 @@ function LoadData()
            nos_misc = document.querySelector('.misc-task-list')
           MiscCompletedTask = nos_misc.querySelectorAll('.css-task-completed').length
          // if(MiscActiveBtn===0){MiscActiveBtn=2}
-          console.log('MISC ACTIVE:',MiscActiveBtn,"MISC COM",MiscCompletedTask)
+        //  console.log('MISC ACTIVE:',MiscActiveBtn,"MISC COM",MiscCompletedTask)
 
-  
     }
 
 if(ImpActiveBtn===4)
@@ -454,4 +453,4 @@ LoadData();
   //console.log('misc count:',MiscCompletedTask,'misc active:',nos_misc)
    // console.log('imp count:',ImpCompletedTask,'imp active:',nos_misc)
    // console.log(nos_misc)
-update_progress_bar(0);
+  update_progress_bar(calc_percent())
