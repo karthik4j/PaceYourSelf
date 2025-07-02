@@ -370,19 +370,18 @@ function show_help()
 {
   let question=`<div class="css-help-page">
                   <div class='about-title-span'>Help</div>
-                  <div class='about-proj-div'>The PaceYourSelf app was designed to be intuitive to users but some users may still have doubts about how to use the app. In that case, this tutorial serves to help them.
+                  <div class='about-proj-div'>The PaceYourSelf app was designed to be intuitive to use, but some users may still have doubts about how to use the app. In that case, this tutorial serves to help them.
                   <p></p>
                   The tasks in this app are categorized into two, "Important" and "Miscellaneous".
-                  You can only add three important task at a time. You can add more important tasks only after you complete all three of them. When all three tasks are completed. The app will automatically remove them and you can add new tasks.
+                  Users can only add three important task at a time. Users can add additional important tasks only after they complete all three of them. When all three tasks are completed, the app will automatically remove them and the user can add new tasks.
                   <p></p>
-                  Miscellaneous tasks are those which you wish to complete if possible, but it's not that important if you don't. You can use this section to note down any thoughts that comes to your mind while performing one of the important tasks. Users can add as many Miscellaneous tasks as you want.
-                  A "Clear tasks" button is provided so that users can clear completed tasks. The app does not remove Miscellaneous tasks automatically, providing more granular control to the user.
+                  Miscellaneous tasks are those which the user wish to complete if possible, but it's not that important if they don't. Users can use this section to note down any thoughts that comes to their mind while performing one of the important tasks. Users can add as many miscellaneous tasks as they want.
+                  A "Clear tasks" button is provided so that users can clear completed tasks. The app does not remove miscellaneous tasks automatically, providing more granular control to the user.
                   <p></p>
                   The user can add tasks to any of the section by clicking the "Add a new task" button.
-                  A window will pop-up so that you can enter the task. You may use the enter key to set the task.
-                  Users can also add a task to the list by clicking the "Let's go" button.
+                  A window will pop-up so that the user can enter the name of the task. Users may use the enter key to add the task or they can click a button labelled "Let's go" to do the same.
                   <p></p>
-                  To mark a task as completed, you can press the task name and it will change its color to a light-green color to indicate that it has been marked complete. If you click the task name again, it changes the state from complete to incomplete.
+                  After completing a task, the user can mark it as completed by clicking the task name, which would change its color to a light green color to indicate that it has been marked. Users can unmark a task by clicking its name.
                   <p></p>
                   The progress bar is used to visually represent the user's progress. 
                   It takes into account both Important and Miscellaneous task completion status.
